@@ -302,7 +302,7 @@ if qt is not None:
     
     # Hitung metrik lainnya
     top_to = qt['TO'].value_counts()
-    top_subject = qt['SUBJECT'].value_counts()
+    top_subject = qt['SUBJECT '].value_counts()
     qty_type_counts = qt['QUANTITY'].value_counts()
     quantity_segmentation = qt['QUANTITY_TYPE'].value_counts()
     
@@ -470,3 +470,4 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
