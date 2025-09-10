@@ -259,49 +259,57 @@ if qt is not None:
     
     # Bar chart
     colors = ['#3498db', '#2ecc71', '#e74c3c', '#f39c12', '#9b59b6']
-    bars = ax5.bar(range(len(qty_type_counts)), qty_type_counts.values, 
-                   color=colors[:len(qty_type_counts)], 
+    bars = ax1.bar(range(len(qty_type_counts)), qty_type_counts.values,
+                   color=colors[:len(qty_type_counts)],
                    edgecolor='black', alpha=0.8, linewidth=0.8)
-    
+
     # Add value labels on bars
     for i, bar in enumerate(bars):
         height = bar.get_height()
-        ax5.text(bar.get_x() + bar.get_width()/2., height + max(qty_type_counts.values)*0.01,
+        ax1.text(bar.get_x() + bar.get_width()/2., height + max(qty_type_counts.values)*0.01,
                 f'{int(height)}', ha='center', va='bottom', fontweight='bold')
-    
+
     # Customize bar chart
-    ax5.set_title('Distribusi Tipe QUANTITY', fontsize=12, fontweight='bold', pad=15)
-    ax5.set_xlabel('Tipe QUANTITY', fontsize=10, fontweight='bold')
-    ax5.set_ylabel('Jumlah', fontsize=10, fontweight='bold')
+    ax5.set_title('Distribusi Tipe QUANTITY', fontsize=16, fontweight='bold', pad=20)
+    ax5.set_xlabel('Tipe QUANTITY', fontsize=12, fontweight='bold', labelpad=10)
+    ax5.set_ylabel('Jumlah', fontsize=12, fontweight='bold', labelpad=10)
     ax5.set_xticks(range(len(qty_type_counts)))
     ax5.set_xticklabels(qty_type_counts.index, rotation=45, ha='right')
     ax5.yaxis.grid(True, linestyle='--', alpha=0.7)
     ax5.spines[['top', 'right']].set_visible(False)
-    
+
     # Pie chart
-    wedges, texts, autotexts = ax6.pie(qty_type_counts.values, 
-                                       labels=qty_type_counts.index, 
+    wedges, texts, autotexts = ax6.pie(qty_type_counts.values,
+                                       labels=qty_type_counts.index,
                                        autopct='%1.1f%%',
                                        colors=colors[:len(qty_type_counts)],
                                        startangle=90,
-                                       textprops={'fontsize': 9})
-    
+                                       textprops={'fontsize': 10})
+
     # Customize pie chart
-    ax6.set_title('Proporsi Tipe QUANTITY', fontsize=12, fontweight='bold', pad=15)
+    ax6.set_title('Proporsi Tipe QUANTITY', fontsize=16, fontweight='bold', pad=20)
     
     # Make autopct text more readable
     for autotext in autotexts:
-        autotext.set_color('white')
-        autotext.set_fontweight('bold')
-    
-    st.pyplot(fig5)
-    
+    autotext.set_color('white')
+    autotext.set_fontweight('bold')
+    autotext.set_fontsize(10)
+
+    # Add a legend
+    ax6.legend(wedges, qty_type_counts.index,
+              title="Tipe QUANTITY",
+              loc="center left",
+              bbox_to_anchor=(1, 0, 0.5, 1))
+
+    plt.tight_layout()
+    plt.show()
+
     # Display summary statistics
-    st.write("**Statistik Distribusi Tipe QUANTITY:**")
+    print("\nStatistik Distribusi Tipe QUANTITY:")
     total = qty_type_counts.sum()
     for i, (qty_type, count) in enumerate(qty_type_counts.items()):
         percentage = (count / total) * 100
-        st.write(f"{i+1}. {qty_type}: {count} ({percentage:.1f}%)")
+        print(f"{i+1}. {qty_type}: {count} ({percentage:.1f}%)")
 
 # Footer
 st.markdown("---")
@@ -320,3 +328,4 @@ st.markdown(
     unsafe_allow_html=True
 
 )
+
