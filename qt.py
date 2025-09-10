@@ -291,9 +291,9 @@ if qt is not None:
     
     # Make autopct text more readable
     for autotext in autotexts:
-    autotext.set_color('white')
-    autotext.set_fontweight('bold')
-    autotext.set_fontsize(10)
+        autotext.set_color('white')
+        autotext.set_fontweight('bold')
+        autotext.set_fontsize(10)
 
     # Add a legend
     ax6.legend(wedges, qty_type_counts.index,
@@ -328,4 +328,5 @@ st.markdown(
     unsafe_allow_html=True
 
 )
+
 
