@@ -252,7 +252,7 @@ if qt is not None:
     
     # Hitung metrik lainnya
     top_to = qt['TO'].value_counts()
-    top_subject = qt['SUBJECT'].value_counts()  # Perbaiki nama kolom (hapus spasi jika ada)
+    top_subject = qt['SUBJECT '].value_counts()  # Perbaiki nama kolom (hapus spasi jika ada)
     qty_type_counts = qt['QUANTITY'].value_counts()
     
     # Tampilkan info dataset
@@ -359,3 +359,4 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
