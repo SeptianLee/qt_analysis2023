@@ -266,7 +266,7 @@ if qt is not None:
     # Add value labels on bars
     for i, bar in enumerate(bars):
         height = bar.get_height()
-        ax1.text(bar.get_x() + bar.get_width()/2., height + max(qty_type_counts.values)*0.01,
+        ax5.text(bar.get_x() + bar.get_width()/2., height + max(qty_type_counts.values)*0.01,
                 f'{int(height)}', ha='center', va='bottom', fontweight='bold')
 
     # Customize bar chart
@@ -328,5 +328,6 @@ st.markdown(
     unsafe_allow_html=True
 
 )
+
 
 
