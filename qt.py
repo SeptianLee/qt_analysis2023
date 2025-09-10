@@ -259,7 +259,7 @@ if qt is not None:
     
     # Bar chart
     colors = ['#3498db', '#2ecc71', '#e74c3c', '#f39c12', '#9b59b6']
-    bars = ax1.bar(range(len(qty_type_counts)), qty_type_counts.values,
+    bars = ax5.bar(range(len(qty_type_counts)), qty_type_counts.values,
                    color=colors[:len(qty_type_counts)],
                    edgecolor='black', alpha=0.8, linewidth=0.8)
 
@@ -328,6 +328,7 @@ st.markdown(
     unsafe_allow_html=True
 
 )
+
 
 
 
