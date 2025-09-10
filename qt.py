@@ -67,7 +67,7 @@ def extract_quantity(text):
             for n,u in re.findall(pattern, text)]
 
 # --- Expand Data ---
-def expand_data(qt)
+def expand_data(qt):
     expanded = []
     for _, row in qt.iterrows():
         for q in extract_quantity(row['QUANTITY']):
@@ -379,6 +379,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
 
