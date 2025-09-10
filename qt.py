@@ -257,7 +257,7 @@ if qt is not None:
     
     # Tampilkan info dataset
     st.subheader("📋 Informasi Dataset")
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4 = st.columns(2)
     col1.metric("Jumlah Data", f"{len(qt):,}")
     col2.metric("Periode Awal", qt['DATE'].min().strftime('%d %b %Y'))
     col3.metric("Periode Akhir", qt['DATE'].max().strftime('%d %b %Y'))
@@ -359,4 +359,5 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
