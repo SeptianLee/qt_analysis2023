@@ -52,6 +52,25 @@ def load_data():
         st.error(f"Terjadi kesalahan saat memuat data: {str(e)}")
         return None
 
+    # --- 3. bersihkan & normalisasi kolom QUANTITY ---
+    # simpan raw uppercase untuk deteksi keywords
+    qt['QUANTITY_raw'] = qt['QUANTITY'].astype(str).str.strip()
+    qt['QUANTITY_up'] = qt['QUANTITY_raw'].str.upper()
+
+    # ekstrak angka (misal "23 unit" -> 23). Jika tidak ada angka -> NaN
+    qt['quantity_num'] = qt['QUANTITY_up'].str.extract(r'(\d+)').astype(float)
+
+    # deteksi kata 'VARIOUS' atau variasi (anggap kata 'VARIOUS' menandakan non-numeric)
+    qt['is_various'] = qt['QUANTITY_up'].str.contains('VARIOUS', na=False)
+
+    # deteksi kata 'UNIT' bila perlu
+    qt['has_unit_word'] = qt['QUANTITY_up'].str.contains(r'\bUNIT\b', na=False)
+
+    # set kategori quantity_type: 'numeric' / 'various' / 'other'
+    qt['quantity_type'] = np.where(qt['quantity_num'].notna(), 'numeric',
+                            np.where(qt['is_various'], 'various', 'other'))
+
+
 # Fungsi untuk membuat visualisasi
 def create_monthly_chart(monthly_counts):
     if len(monthly_counts) == 0:
@@ -351,6 +370,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
 
