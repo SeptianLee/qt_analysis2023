@@ -67,7 +67,7 @@ if qt is not None:
     
     # Hitung metrik lainnya
     top_to = qt['TO'].value_counts()
-    top_subject = qt['SUBJECT'].value_counts()
+    top_subject = qt['SUBJECT '].value_counts()
     qty_type_counts = qt['QUANTITY'].value_counts()
     
     # Tampilkan info dataset
@@ -318,4 +318,5 @@ st.markdown(
     </div>
     """,
     unsafe_allow_html=True
+
 )
