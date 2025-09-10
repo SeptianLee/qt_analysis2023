@@ -67,23 +67,18 @@ def extract_quantity(text):
             for n,u in re.findall(pattern, text)]
 
 # --- Expand Data ---
-expanded = []
-for _, row in qt.iterrows():
-    for q in extract_quantity(row['QUANTITY']):
-        expanded.append({
-            'DATE': row['DATE'],
-            'TO': row['TO'],
-            'SUBJECT': row.get('SUBJECT', None),  # aman kalau SUBJECT hilang
-            'num': q['num'],
-            'unit': q['unit']
-        })
-qt_expanded = pd.DataFrame(expanded)
-
-# --- Ringkasan ---
-unit_summary = qt_expanded.groupby('unit')['num'].sum().sort_values(ascending=False)
-monthly_qty = (qt_expanded[qt_expanded['unit']=='unit']
-               .groupby(qt_expanded['DATE'].dt.to_period('M'))['num']
-               .sum().to_timestamp())
+def expand_data(qt)
+    expanded = []
+    for _, row in qt.iterrows():
+        for q in extract_quantity(row['QUANTITY']):
+            expanded.append({
+                'DATE': row['DATE'],
+                'TO': row['TO'],
+                'SUBJECT': row.get('SUBJECT', None),  # aman kalau SUBJECT hilang
+                'num': q['num'],
+                'unit': q['unit']
+            })
+    return pd.DataFrame(expanded)
 
 # Fungsi untuk membuat visualisasi
 def create_monthly_chart(monthly_counts):
@@ -384,6 +379,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
 
