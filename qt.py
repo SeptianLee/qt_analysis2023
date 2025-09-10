@@ -53,7 +53,7 @@ def load_data():
         return None
 
    # rapikan nama kolom (hapus spasi depan/belakang)
-qt.columns=qt.columns.str.strip()
+qt.columns=qt.columns.get_level_values(0).str.strip()
 
 qt['DATE'] = pd.to_datetime(qt['DATE'], dayfirst=True, errors='coerce')
 
@@ -383,6 +383,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
 
