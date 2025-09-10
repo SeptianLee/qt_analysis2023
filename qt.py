@@ -40,6 +40,11 @@ def load_data():
         file_path = "QT_REPORT_2023.xlsx"
         qt = pd.read_excel(file_path)
         
+        # rapikan nama kolom (hapus spasi depan/belakang)
+        if isinstance(qt.columns, pd.MultiIndex):
+            qt.columns = qt.columns.get_level_values(0).str.strip()
+        else:
+            qt.columns = qt.columns.str.strip()
         # Preprocessing data
         qt['DATE'] = pd.to_datetime(qt['DATE'], format='%d/%m/%Y', errors='coerce')
         qt['Year_Month'] = qt['DATE'].dt.to_period('M')
@@ -52,10 +57,6 @@ def load_data():
         st.error(f"Terjadi kesalahan saat memuat data: {str(e)}")
         return None
 
-   # rapikan nama kolom (hapus spasi depan/belakang)
-qt.columns=qt.columns.get_level_values(0).str.strip()
-
-qt['DATE'] = pd.to_datetime(qt['DATE'], dayfirst=True, errors='coerce')
 
 # --- Fungsi ekstrak QUANTITY ---
 def extract_quantity(text):
@@ -383,6 +384,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
 
